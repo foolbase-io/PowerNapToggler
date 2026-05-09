@@ -22,7 +22,7 @@ PowerNap Toggler is a tiny macOS menu bar utility for switching between Battery 
 - [x] Verified state after applying changes
 - [ ] Manual QA on a real Mac outside the sandbox
 - [ ] Final landing page publish in Framer
-- [ ] Create public GitHub release
+- [x] Create public GitHub release
 - [x] Add downloadable release asset
 - [x] Decide signing/notarization path
 - [x] Add signing/notarization docs and script
@@ -36,7 +36,7 @@ PowerNap Toggler is a tiny macOS menu bar utility for switching between Battery 
 ## Launch Campaign Checklist
 
 - [ ] Update landing page CTA to final download link
-- [ ] Publish GitHub release notes
+- [x] Publish GitHub release notes
 - [ ] Prepare Product Hunt launch draft
 - [ ] Prepare X/Twitter launch thread
 - [ ] Prepare Reddit/Hacker News helpful posts

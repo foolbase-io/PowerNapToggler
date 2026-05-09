@@ -14,6 +14,18 @@ Signed and notarized release artifact:
 dist/PowerNap-Toggler-Free-Launch-Month-signed.zip
 ```
 
+GitHub release:
+
+```text
+https://github.com/foolbase-io/PowerNapToggler/releases/tag/v1.0.0
+```
+
+Public download URL:
+
+```text
+https://github.com/foolbase-io/PowerNapToggler/releases/download/v1.0.0/PowerNap-Toggler-Free-Launch-Month-signed.zip
+```
+
 Size:
 
 ```text
