@@ -48,5 +48,3 @@ dist/PowerNap-Toggler-Free-Launch-Month.zip
 macOS asks for an administrator password before changing system energy settings. PowerNap Toggler explains this before applying changes and verifies the reported state after each update.
 
 PowerNap Toggler is planned to launch free for the first month, then move to a one-time paid license.
-
-For signing and notarization, see [SIGNING_NOTARIZATION.md](SIGNING_NOTARIZATION.md).
