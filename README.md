@@ -47,4 +47,4 @@ dist/PowerNap-Toggler-Free-Launch-Month.zip
 
 macOS asks for an administrator password before changing system energy settings. PowerNap Toggler explains this before applying changes and verifies the reported state after each update.
 
-PowerNap Toggler is planned to launch free for the first month, then move to a one-time paid license.
+PowerNap Toggler launches with a calendar-based free access window through June 8, 2026. Starting June 9, 2026, the app requires the planned one-time paid license to keep switching modes. This cutoff is intentionally not based on install date, so early downloads do not remain free forever.

@@ -6,8 +6,9 @@ PowerNap Toggler is a tiny macOS menu bar utility for switching between Battery 
 
 ## Launch Offer
 
-- Launch as free for the first 30 days.
+- Launch as free through June 8, 2026.
 - After the launch window, move to a one-time paid license.
+- Use a calendar-based cutoff, not install date, so early downloads do not remain free forever.
 - Recommended paid price: $9 once.
 - No subscription for the first paid release.
 
@@ -20,6 +21,7 @@ PowerNap Toggler is a tiny macOS menu bar utility for switching between Battery 
 - [x] Scrollable popover content
 - [x] First-run admin permission explanation
 - [x] Verified state after applying changes
+- [x] Calendar-based free launch cutoff in app
 - [ ] Manual QA on a real Mac outside the sandbox
 - [ ] Final landing page publish in Framer
 - [x] Create public GitHub release
@@ -37,9 +39,9 @@ PowerNap Toggler is a tiny macOS menu bar utility for switching between Battery 
 
 - [ ] Update landing page CTA to final download link
 - [x] Publish GitHub release notes
-- [ ] Prepare Product Hunt launch draft
-- [ ] Prepare X/Twitter launch thread
-- [ ] Prepare Reddit/Hacker News helpful posts
+- [x] Prepare Product Hunt launch draft
+- [x] Prepare X/Twitter launch thread
+- [x] Prepare Reddit/Hacker News helpful posts
 - [ ] Submit to relevant macOS app directories
 - [ ] Track downloads by source
 - [x] Draft GitHub release copy
@@ -67,8 +69,8 @@ Avoid:
 
 Short:
 
-> PowerNap Toggler is free for launch month. Tiny macOS menu bar app. Switch your Mac between Battery Saver and Normal Mode. No tracking. No App Store required.
+> PowerNap Toggler is free through June 8, 2026. Tiny macOS menu bar app. Switch your Mac between Battery Saver and Normal Mode. No tracking. No App Store required.
 
 Medium:
 
-> PowerNap Toggler is a lean macOS menu bar utility that switches Power Nap and TCP keepalive between Battery Saver and Normal Mode. It is free during launch month, then moves to a simple one-time license.
+> PowerNap Toggler is a lean macOS menu bar utility that switches Power Nap and TCP keepalive between Battery Saver and Normal Mode. It is free through June 8, 2026, then moves to a simple $9 one-time license.

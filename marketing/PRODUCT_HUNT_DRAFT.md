@@ -14,7 +14,7 @@ PowerNap Toggler is a lightweight macOS menu bar utility that lets you switch Po
 
 It is built for Mac users who want their laptop to rest when they care about battery, but return to normal background behavior when they need the Mac ready and connected.
 
-Free during launch month. No tracking. No App Store required.
+Free through June 8, 2026. No tracking. No App Store required.
 
 ## First Comment
 
@@ -34,7 +34,6 @@ There are only two modes:
 
 I rebuilt the app with a cleaner menu bar panel, verified state handling, clearer permission messaging, and no tracking.
 
-It is free during launch month while I collect feedback before switching to a one-time paid license.
+It is free through June 8, 2026 while I collect feedback before switching to a $9 one-time license.
 
 Would love feedback from MacBook users, indie devs, and anyone who has fought weird battery drain during sleep.
-

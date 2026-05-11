@@ -141,7 +141,7 @@ Metric to check:
 
 Message:
 
-> PowerNap Toggler is free for launch month. Tiny macOS menu bar app. Switch between Battery Saver and Normal Mode. No tracking. No App Store required.
+> PowerNap Toggler is free through June 8, 2026. Tiny macOS menu bar app. Switch between Battery Saver and Normal Mode. No tracking. No App Store required.
 
 Channels:
 - Landing page
@@ -171,4 +171,3 @@ Channels:
 - X/Twitter
 - GitHub
 - Indie Hackers
-

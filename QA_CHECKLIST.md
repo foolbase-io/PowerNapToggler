@@ -40,5 +40,4 @@ Run this on a real Mac before publishing the release.
 - [ ] DMG filename is correct.
 - [ ] README and release notes match the shipped behavior.
 - [ ] Landing page CTA points to the final release asset.
-- [ ] Price copy says free launch month, then paid.
-
+- [ ] Price copy says free through June 8, 2026, then paid.

@@ -103,6 +103,73 @@ struct CommandResult {
     let output: String
 }
 
+enum LaunchAccessState: Equatable {
+    case freeLaunch(daysRemaining: Int)
+    case licensed
+    case expired
+
+    var canApplyChanges: Bool {
+        switch self {
+        case .freeLaunch, .licensed:
+            return true
+        case .expired:
+            return false
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .freeLaunch(let daysRemaining):
+            return daysRemaining <= 1 ? "Free launch ends today" : "Free launch: \(daysRemaining) days left"
+        case .licensed:
+            return "Licensed"
+        case .expired:
+            return "Free launch ended"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .freeLaunch:
+            return "After the launch window, PowerNap Toggler requires the one-time license."
+        case .licensed:
+            return "Thanks for supporting the app."
+        case .expired:
+            return "Unlock the one-time license to keep switching modes."
+        }
+    }
+}
+
+enum LaunchAccess {
+    static let purchaseURL = URL(string: "https://powernaptoggler.framer.ai/#pricing")!
+
+    private static let licenseFlagKey = "hasPowerNapTogglerLicense"
+
+    private static var freeLaunchEndDate: Date {
+        var components = DateComponents()
+        components.calendar = Calendar(identifier: .gregorian)
+        components.timeZone = TimeZone(secondsFromGMT: 0)
+        components.year = 2026
+        components.month = 6
+        components.day = 9
+        return components.date ?? Date.distantPast
+    }
+
+    static func currentState(now: Date = Date()) -> LaunchAccessState {
+        if UserDefaults.standard.bool(forKey: licenseFlagKey) {
+            return .licensed
+        }
+
+        guard now < freeLaunchEndDate else {
+            return .expired
+        }
+
+        let secondsRemaining = freeLaunchEndDate.timeIntervalSince(now)
+        let daysRemaining = max(1, Int(ceil(secondsRemaining / 86_400)))
+        return .freeLaunch(daysRemaining: daysRemaining)
+    }
+}
+
 @main
 struct PowerNapTogglerApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
@@ -228,6 +295,7 @@ final class NapManager: ObservableObject {
     @Published private(set) var isApplying = false
     @Published private(set) var lastMessage = "Ready"
     @Published private(set) var didExplainPrivileges = UserDefaults.standard.bool(forKey: "didExplainPrivileges")
+    @Published private(set) var accessState = LaunchAccess.currentState()
 
     private init() {}
 
@@ -241,6 +309,7 @@ final class NapManager: ObservableObject {
     }
 
     func refresh() {
+        accessState = LaunchAccess.currentState()
         snapshot = PowerSnapshot(
             powerNap: readPowerNapState(),
             tcpKeepalive: readTCPKeepaliveState()
@@ -250,6 +319,12 @@ final class NapManager: ObservableObject {
     @MainActor
     func apply(_ mode: PowerMode) async {
         guard mode == .normal || mode == .batterySaver else { return }
+        accessState = LaunchAccess.currentState()
+        guard accessState.canApplyChanges else {
+            lastMessage = "Free launch access ended. Unlock to continue."
+            openPurchasePage()
+            return
+        }
 
         isApplying = true
         lastMessage = "Applying \(mode.title)..."
@@ -271,6 +346,10 @@ final class NapManager: ObservableObject {
         }
 
         isApplying = false
+    }
+
+    func openPurchasePage() {
+        NSWorkspace.shared.open(LaunchAccess.purchaseURL)
     }
 
     private func readPowerNapState() -> PowerSettingState {
@@ -367,6 +446,7 @@ struct PowerNapPanel: View {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 18) {
                     header
+                    accessBanner
                     modeCard
                     settingRows
                     footer
@@ -426,10 +506,14 @@ struct PowerNapPanel: View {
             }
 
             Button {
-                if !manager.didExplainPrivileges {
-                    manager.markPrivilegesExplained()
+                if manager.accessState.canApplyChanges {
+                    if !manager.didExplainPrivileges {
+                        manager.markPrivilegesExplained()
+                    }
+                    Task { await manager.apply(manager.targetMode) }
+                } else {
+                    manager.openPurchasePage()
                 }
-                Task { await manager.apply(manager.targetMode) }
             } label: {
                 HStack {
                     if manager.isApplying {
@@ -437,9 +521,9 @@ struct PowerNapPanel: View {
                             .controlSize(.small)
                             .tint(.black)
                     } else {
-                        Image(systemName: manager.targetMode.symbolName)
+                        Image(systemName: manager.accessState.canApplyChanges ? manager.targetMode.symbolName : "lock.open")
                     }
-                    Text(manager.isApplying ? "Applying..." : "Switch to \(manager.targetMode.title)")
+                    Text(primaryButtonTitle)
                         .fontWeight(.semibold)
                 }
                 .frame(maxWidth: .infinity)
@@ -472,6 +556,42 @@ struct PowerNapPanel: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .stroke(.white.opacity(0.14), lineWidth: 1)
         )
+    }
+
+    private var accessBanner: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: manager.accessState.canApplyChanges ? "checkmark.seal.fill" : "lock.fill")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(manager.accessState.canApplyChanges ? Color(red: 0.7, green: 0.92, blue: 1.0) : Color(red: 1.0, green: 0.78, blue: 0.42))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(manager.accessState.title)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.86))
+                Text(manager.accessState.subtitle)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.white.opacity(0.56))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(12)
+        .background(.white.opacity(0.065), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(.white.opacity(0.09), lineWidth: 1)
+        )
+    }
+
+    private var primaryButtonTitle: String {
+        if manager.isApplying {
+            return "Applying..."
+        }
+
+        if manager.accessState.canApplyChanges {
+            return "Switch to \(manager.targetMode.title)"
+        }
+
+        return "Unlock to continue"
     }
 
     private var permissionNote: some View {

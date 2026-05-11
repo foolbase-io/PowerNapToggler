@@ -4,7 +4,7 @@
 
 ### Post 1
 
-PowerNap Toggler is free for launch month.
+PowerNap Toggler is free through June 8, 2026.
 
 Tiny macOS menu bar app for switching between Battery Saver and Normal Mode by controlling Power Nap and TCP keepalive.
 
@@ -20,7 +20,7 @@ I rebuilt an old tiny Mac utility into something much cleaner:
 - verifies macOS state after changes
 - no tracking
 
-Free for launch month.
+Free through June 8, then $9 once.
 
 ### Post 3
 
@@ -28,7 +28,7 @@ If your MacBook loses battery while sleeping, background wake behavior may be pa
 
 PowerNap Toggler gives you a simple menu bar switch for Power Nap and TCP keepalive.
 
-Free during launch month.
+Free through June 8, then $9 once.
 
 ## Reddit / Hacker News Helpful Reply
 
@@ -56,7 +56,7 @@ pmset -g custom | grep powernap
 sysctl net.inet.tcp.always_keepalive
 ```
 
-I’m working on a tiny menu bar app called PowerNap Toggler that switches those between Battery Saver and Normal Mode if you prefer not to remember the commands. It’s free during launch month.
+I’m working on a tiny menu bar app called PowerNap Toggler that switches those between Battery Saver and Normal Mode if you prefer not to remember the commands. It is free through June 8, then $9 once.
 
 ## Indie Hackers / Build In Public
 
@@ -73,4 +73,3 @@ The rebuild focused on trust:
 - no tracking
 
 Plan: launch free for one month, collect feedback, then move to a $9 one-time license.
-

@@ -20,9 +20,8 @@
 ### Changed
 
 - Replaced the old immediate blind toggle with a more trustworthy control panel.
-- Updated product positioning around a free launch month, followed by paid one-time licensing.
+- Updated product positioning around a free launch window, followed by paid one-time licensing.
 
 ### Removed
 
 - Removed loose single-file source layout in favor of a repeatable package structure.
-
